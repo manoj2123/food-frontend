@@ -9,7 +9,7 @@ const Dashboard = () => {
     const navigate = useNavigate()
     useEffect(() => {
         if (!localStorage.getItem("token")) {
-            navigate("/login", { replace: true })
+            navigate("/", { replace: true })
         }
         let token = localStorage.getItem("token")
         const fetchAllData = async () => {

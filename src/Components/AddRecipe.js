@@ -12,7 +12,13 @@ const Addrecipe = ({userData, setUserData}) =>{
     const [instructions, setinstructions] = useState("")
     const [error, setError] = useState("")
     const [sucessMsg, setSucessMessage] = useState("")
-const navigate = useNavigate()
+    const navigate = useNavigate()
+    
+
+
+
+ 
+  let tokenId = localStorage.getItem("token");
 
 
 // const handleImageChange = (e) => {
@@ -43,7 +49,7 @@ const navigate = useNavigate()
        }
        setUserData([...userData, data.data])
        setSucessMessage(data.message)
-       navigate("/user")
+       navigate("/")
     }
 
     return (
@@ -107,6 +113,11 @@ const navigate = useNavigate()
         type="submit"  variant ="contained"
         onClick={postNewrecipe}
         >Add recipe</Button>
+
+{/* <Button edge="end" color="inherit" aria-label="add recipe" onClick={() => navigate(`/add/${tokenId}`)} sx={{ mr: 2 }}>
+          Add recipe
+        </Button> */}
+
 
        {error? 
         <Typography color={"danger"}>

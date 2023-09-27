@@ -1,10 +1,12 @@
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Button } from '@mui/material';
 
 function Base({title, description, children}) {
 //const history = useHistory() v5
 const navigate = useNavigate()
+let tokenId = localStorage.getItem("token");
 function handleLogut(){
     localStorage.removeItem("token")
     navigate("/login")
@@ -15,10 +17,37 @@ function handleLogut(){
       <nav>
       <AppBar position="static">
   <Toolbar variant="dense">
-    <Typography sx={{ mr: 2 }}>  
-     Food recipe
-    </Typography>
+    
+<Typography sx={{ mr: 2, fontSize: '24px', fontWeight: 'bold', color: '#333' }}>
+  Food recipe blog
+</Typography>
 
+
+
+  
+
+<Button
+  edge="end"
+  color="inherit"
+  aria-label="add recipe"
+  onClick={() => navigate(`/add/${tokenId}`)}
+  sx={{
+    marginRight: 2,
+    backgroundColor: 'warning.main', 
+    color: 'pink', 
+    '&:hover': {
+      backgroundColor: 'success.main',
+    },
+  }}
+>
+  Add recipe
+</Button>
+
+
+
+
+
+        
 
     <IconButton 
     edge="end"
@@ -28,14 +57,18 @@ function handleLogut(){
      Dashboard
     </IconButton>
 
-    <IconButton 
+
+
+
+
+    {/* <IconButton 
     edge="end" 
     color="inherit"
      aria-label="recipe"
      onClick={()=>navigate("/user")}
       sx={{ mr: 2 }}>  
-       MyAccount
-    </IconButton>
+       Add Recipe
+    </IconButton> */}
 
    
 
@@ -47,6 +80,8 @@ function handleLogut(){
     sx={{ mr: 2 }}>  
      Login
     </IconButton>
+
+    
 
    <IconButton 
     edge="end" 

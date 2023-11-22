@@ -7,10 +7,20 @@ function Base({title, description, children}) {
 //const history = useHistory() v5
 const navigate = useNavigate()
 let tokenId = localStorage.getItem("token");
-function handleLogut(){
-    localStorage.removeItem("token")
-    navigate("/login")
+
+
+function handleAuthentication() {
+  if (tokenId) {
+    // User is logged in, perform logout
+    localStorage.removeItem("token");
+    navigate("/login");
+  } else {
+    // User is not logged in, navigate to login page
+    navigate("/login");
+  }
 }
+
+
   return (
     <div className='main-container'>
       <header>
@@ -72,14 +82,16 @@ function handleLogut(){
 
    
 
-    <IconButton 
-    edge="end" 
-    color="inherit" 
-    aria-label="add recipe" 
-    onClick={()=>navigate("/login")}
-    sx={{ mr: 2 }}>  
-     Login
-    </IconButton>
+
+  <IconButton
+               edge="end"
+                color="inherit"
+                aria-label={tokenId ? "logout" : "login"}
+                onClick={handleAuthentication}
+                sx={{ mr: 2 }}
+              >
+                {tokenId ? "Logout" : "Login"}
+              </IconButton>
 
     
 
@@ -92,14 +104,7 @@ function handleLogut(){
      Signup
     </IconButton>
 
-    <IconButton 
-    edge="end" 
-    color="inherit" 
-    aria-label="add recipe" 
-    onClick={handleLogut}
-    sx={{ mr: 2 }}>  
-     logout
-    </IconButton>
+   
 
   </Toolbar>
 </AppBar>

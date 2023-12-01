@@ -3,88 +3,81 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material';
 
-function Base({title, description, children}) {
-//const history = useHistory() v5
-const navigate = useNavigate()
-let tokenId = localStorage.getItem("token");
+function Base({ title, description, children }) {
+  //const history = useHistory() v5
+  const navigate = useNavigate()
+  let tokenId = localStorage.getItem("token");
 
 
-function handleAuthentication() {
-  if (tokenId) {
-    // User is logged in, perform logout
-    localStorage.removeItem("token");
-    navigate("/login");
-  } else {
-    // User is not logged in, navigate to login page
-    navigate("/login");
+  function handleAuthentication() {
+    if (tokenId) {
+      // User is logged in, perform logout
+      localStorage.removeItem("token");
+      navigate("/login");
+    } else {
+      // User is not logged in, navigate to login page
+      navigate("/login");
+    }
   }
-}
 
 
   return (
     <div className='main-container'>
       <header>
-      <nav>
-      <AppBar position="static">
-  <Toolbar variant="dense">
-    
-<Typography sx={{ mr: 2, fontSize: '24px', fontWeight: 'bold', color: '#333' }}>
-  Food recipe blog
-</Typography>
+        <nav>
+          <AppBar position="static">
+            <Toolbar variant="dense">
 
-
-
-  
-
-<Button
-  edge="end"
-  color="inherit"
-  aria-label="add recipe"
-  onClick={() => navigate(`/add/${tokenId}`)}
-  sx={{
-    marginRight: 2,
-    backgroundColor: 'warning.main', 
-    color: 'pink', 
-    '&:hover': {
-      backgroundColor: 'success.main',
-    },
-  }}
->
-  Add recipe
-</Button>
+              <Typography sx={{ mr: 2, fontSize: '24px', fontWeight: 'bold', color: '#333' }}>
+                Food recipe blog
+              </Typography>
 
 
 
 
 
-        
-
-    <IconButton 
-    edge="end"
-     color="inherit"
-     onClick={()=>navigate("/")}
-      aria-label="dashboard" sx={{ mr: 2 }}>  
-     Dashboard
-    </IconButton>
-
-
-
-
-
-    {/* <IconButton 
-    edge="end" 
-    color="inherit"
-     aria-label="recipe"
-     onClick={()=>navigate("/user")}
-      sx={{ mr: 2 }}>  
-       Add Recipe
-    </IconButton> */}
-
-   
+              <Button
+                edge="end"
+                color="inherit"
+                aria-label="add recipe"
+                onClick={() => navigate(`/add/${tokenId}`)}
+                sx={{
+                  marginRight: 2,
+                  backgroundColor: 'warning.main',
+                  color: 'pink',
+                  '&:hover': {
+                    backgroundColor: 'success.main',
+                  },
+                }}
+              >
+                Add recipe
+              </Button>
 
 
-  <IconButton
-               edge="end"
+
+
+
+
+
+              <IconButton
+                edge="end"
+                color="inherit"
+                onClick={() => navigate("/")}
+                aria-label="dashboard" sx={{ mr: 2 }}>
+                Dashboard
+              </IconButton>
+
+
+
+
+
+
+
+
+
+
+              <IconButton
+                edge="end"
                 color="inherit"
                 aria-label={tokenId ? "logout" : "login"}
                 onClick={handleAuthentication}
@@ -93,29 +86,29 @@ function handleAuthentication() {
                 {tokenId ? "Logout" : "Login"}
               </IconButton>
 
-    
 
-   <IconButton 
-    edge="end" 
-    color="inherit" 
-    aria-label="add recipe" 
-    onClick={()=>navigate("/signup")}
-    sx={{ mr: 2 }}>  
-     Signup
-    </IconButton>
 
-   
+              {!tokenId && (
+                <IconButton
+                  edge="end"
+                  color="inherit"
+                  aria-label="add recipe"
+                  onClick={() => navigate("/signup")}
+                  sx={{ mr: 2 }}>
+                  Signup
+                </IconButton>
+              )}
 
-  </Toolbar>
-</AppBar>
+            </Toolbar>
+          </AppBar>
         </nav>
       </header>
       <main>
-          <h1>{title}</h1> 
-          <h4>{description}</h4>
-          <div className='contents'>
-                {children}
-          </div>
+        <h1>{title}</h1>
+        <h4>{description}</h4>
+        <div className='contents'>
+          {children}
+        </div>
       </main>
     </div>
   )

@@ -34,6 +34,7 @@ const SignupPage = () => {
       if (data.token) {
         setError('');
         localStorage.setItem('token', data.token);
+        console.log('Navigating to login page');
         navigate('/login');
       } else {
         setError(data.message);
